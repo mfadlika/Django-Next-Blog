@@ -1,8 +1,41 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function signup() {
+  const [email, setEmail] = useState<string>();
+  const [userName, setUserName] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  // Get a cookie
+  const csrf: string | undefined = Cookies.get("csrftoken");
+
+  async function submitHandler(event: any) {
+    event.preventDefault();
+
+    axios({
+      method: "post",
+      url: "http://localhost:8000",
+      xsrfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFTOKEN",
+      withCredentials: true,
+    });
+
+    // await axios
+    //   .post("http://localhost:8000", {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "X-CSRFToken": csrf,
+    //     },
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+  }
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -11,14 +44,17 @@ export default function signup() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create and account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={submitHandler}>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your email
                 </label>
+
                 <input
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
@@ -31,6 +67,8 @@ export default function signup() {
                 <input
                   type="username"
                   name="username"
+                  value={userName}
+                  onChange={(event) => setUserName(event.target.value)}
                   id="username"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
@@ -43,6 +81,8 @@ export default function signup() {
                 <input
                   type="password"
                   name="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
