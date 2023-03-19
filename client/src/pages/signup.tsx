@@ -10,14 +10,12 @@ export default function signup() {
   const [userName, setUserName] = useState<string>();
   const [password, setPassword] = useState<string>();
 
-  // Get a cookie
-  const csrf: string | undefined = Cookies.get("csrftoken");
-
   async function submitHandler(event: any) {
     event.preventDefault();
 
     axios({
       method: "post",
+      data: { your_data: "your_data" },
       url: "http://localhost:8000",
       xsrfCookieName: "csrftoken",
       xsrfHeaderName: "X-CSRFTOKEN",
