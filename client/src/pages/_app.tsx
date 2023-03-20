@@ -1,11 +1,12 @@
 import Layout from "@/components/Layout";
+import { ThemeProvider } from "next-themes";
 import "@/styles/globals.scss";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import Cookies from "js-cookie";
 
 async function getCSRF() {
-  const data = await fetch("http://localhost:8000/csrf", {
+  const data = await fetch("http://127.0.0.1:8000/csrf", {
     credentials: "include",
   });
 
@@ -19,9 +20,11 @@ function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider attribute="class">
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   );
 }
 

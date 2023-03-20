@@ -2,12 +2,34 @@
 
 /* Header */
 
-#header, #footer {
+#header,
+#footer {
   height: 16.67vh;
 }
 
-#header {
-  background-color: base.$color-white;
+@layer components {
+  .header,
+  .brand {
+    background-color: base.$color-white;
+    color: base.$color-black;
+  }
+
+  .dark-header,
+  .dark-brand {
+    background-color: base.$color-black;
+    color: base.$color-white;
+  }
+
+  .brand {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 200;
+  }
+  #header {
+    @apply header dark:dark-header;
+  }
+  #brand {
+    @apply brand dark:dark-brand;
+  }
 }
 
 #main {
@@ -15,10 +37,8 @@
   position: relative;
 }
 
-.brand {
-  font-family: "Permanent Marker", cursive;
-  font-weight: 200;
-  color: base.$color-black;
+.signup {
+  height: 66.66vh;
 }
 
 .tagline {
