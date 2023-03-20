@@ -1,16 +1,23 @@
-from django.shortcuts import render
+import json
 from django.http import JsonResponse, HttpResponse
-from django.core import serializers
-from .models import Account
-from django.middleware.csrf import get_token
+from .forms import AccountForm
 
 # Create your views here.
 
-def index(request):
-    model_account = Account.objects.all()
-    serialize_model_account = serializers.serialize('json', model_account, fields=('name', 'username'))
-    return HttpResponse(serialize_model_account, content_type="application/json")
+def signup(req):
+    data = req.body.decode('utf8')
+    json_data = json.loads(data)
+    form = AccountForm(json_data)
 
-def get_csrf_token(requests):
-    get_token(requests)
-    return JsonResponse({})
+    if form.is_valid():
+        form.save()
+        return HttpResponse(status=200)
+    else:
+        data = json.loads(form.errors.as_json())
+        error = []
+        for x in data.values():
+            error.append(x[0]['message'])
+        return JsonResponse({'error' : error}, status=403)
+
+def signin(req):
+    pass
