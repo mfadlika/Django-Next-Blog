@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import Footer from "./Footer";
 import Header from "./header/Header";
 
 interface LayoutProps {
@@ -9,9 +8,7 @@ interface LayoutProps {
 export default function Layout(props: LayoutProps): ReactElement {
   return (
     <React.Fragment>
-      <Header></Header>
-      <main id="main">{props.children}</main>
-      <Footer></Footer>
+      <Header>{props.children}</Header>
     </React.Fragment>
   );
 }

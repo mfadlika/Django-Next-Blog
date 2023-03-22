@@ -1,13 +1,19 @@
 import Layout from "@/components/Layout";
-import { ThemeProvider } from "next-themes";
 import "@/styles/globals.scss";
-import { appWithTranslation } from "next-i18next";
-import type { AppProps } from "next/app";
+import axios from "axios";
 import Cookies from "js-cookie";
+import { appWithTranslation } from "next-i18next";
+import { ThemeProvider } from "next-themes";
+import type { AppProps } from "next/app";
 
 async function getCSRF() {
-  const data = await fetch("http://127.0.0.1:8000/csrf", {
-    credentials: "include",
+  const data = await axios({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    url: "http://127.0.0.1:8000/csrf",
+    withCredentials: true,
   });
 
   return data;

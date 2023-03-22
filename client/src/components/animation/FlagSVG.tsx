@@ -4,13 +4,16 @@ interface FlagType {
   [key: string]: ReactElement;
 }
 
+const width = 52;
+const height = 26;
+
 const Flag: FlagType = {
   ukFlag: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 60 30"
-      width="60"
-      height="30"
+      width={width}
+      height={height}
     >
       <clipPath id="s">
         <path d="M0,0 v30 h60 v-30 z" />
@@ -33,16 +36,16 @@ const Flag: FlagType = {
     </svg>
   ),
   idFlag: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="30">
-      <path fill="#fff" d="M0 0H60V30H0z" />
-      <path fill="red" d="M0 0H60V15H0z" />
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
+      <path fill="#fff" d="M0 0H52V26H0z" />
+      <path fill="red" d="M0 0H52V13H0z" />
     </svg>
   ),
   deFlag: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="60"
-      height="30"
+      width={width}
+      height={height}
       viewBox="1 0 5 3"
     >
       <rect id="black_stripe" width="7" height="3" y="0" x="0" fill="#000" />

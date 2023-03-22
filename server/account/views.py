@@ -1,6 +1,7 @@
 import json
 from django.http import JsonResponse, HttpResponse
 from .forms import AccountForm
+from .models import Account
 
 # Create your views here.
 
@@ -20,4 +21,10 @@ def signup(req):
         return JsonResponse({'error' : error}, status=403)
 
 def signin(req):
-    pass
+    data = req.body.decode('utf8')
+    json_data = json.loads(data)
+    try:
+        Account.objects.get(**json_data)
+    except:
+        return JsonResponse({'error' : 'Account not found'}, status=404)
+    return HttpResponse(status=200)

@@ -1,4 +1,4 @@
-import Form, { Button, Input } from "@/components/form";
+import Form, { Button, Input } from "@/lib/form";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
@@ -67,7 +67,11 @@ export default function signup() {
                   </label>
                 </div>
               </div>
-              <Button value="Create an account" className="bg-rose-500"/>
+              <Button
+                value="Create an account"
+                type="submit"
+                className="bg-rose-500"
+              />
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <Link
