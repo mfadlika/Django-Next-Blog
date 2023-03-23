@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
-import os
+import os, datetime
 
 load_dotenv()
 
@@ -25,6 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+
+JWT_SECRET_KEY = os.environ.get('JWT_TOKEN_SECRET_KEY')
+
+# EXPIRY_TIME = datetime.timedelta(seconds=1)
+# JWT_AUTH = {
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=20),  # Token expires * seconds after being issued
+#     'JWT_ALLOW_REFRESH': True,
+#     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(seconds=120),  # Token can be refreshed up to * seconds after being issued
+#  }
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -61,13 +70,15 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
-    "content-type",
-    "X-CSRFToken"
+    "Content-Type",
+    "X-CSRFToken",
+    "Authorization"
 ]
 
 CORS_EXPOSE_HEADERS =[
-    "content-type",
-    "X-CSRFToken"
+    "Content-Type",
+    "X-CSRFToken",
+    "Authorization"
 ]
 
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000','http://localhost:3000']
