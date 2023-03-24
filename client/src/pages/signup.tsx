@@ -1,4 +1,5 @@
-import Form, { Button, Input } from "@/lib/form";
+import { Box, Text } from "@/lib";
+import Form, { Button, CheckBox, Input } from "@/lib/form";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
@@ -18,16 +19,17 @@ export default function signup() {
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="signup flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div className="h-full flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+        <Box className="bg-white dark:bg-gray-600 shadow xl:w-4/12">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <h1 className="text-xl font-bold md:text-2xl">
               Create and account
             </h1>
             <Form onSubmit={submitHandler}>
               <Input
                 type="email"
                 label="Your email"
+                placeholder="your email"
                 value={email}
                 onChange={setEmail}
               />
@@ -45,34 +47,20 @@ export default function signup() {
                 value={password}
                 onChange={setPassword}
               />
-
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="terms"
-                    aria-describedby="terms"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label className="font-light text-gray-500 dark:text-gray-300">
-                    I accept the{" "}
-                    <a
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                      href="#"
-                    >
-                      Terms and Conditions
-                    </a>
-                  </label>
-                </div>
-              </div>
+              <CheckBox label="I accept the ">
+                <Link
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  href="#"
+                >
+                  Terms and Conditions
+                </Link>
+              </CheckBox>
               <Button
                 value="Create an account"
                 type="submit"
-                className="bg-rose-500"
+                className="w-full text-white dark:text-black bg-rose-500"
               />
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              <Text>
                 Already have an account?{" "}
                 <Link
                   href="/signin"
@@ -80,10 +68,10 @@ export default function signup() {
                 >
                   Login here
                 </Link>
-              </p>
+              </Text>
             </Form>
           </div>
-        </div>
+        </Box>
       </div>
     </section>
   );

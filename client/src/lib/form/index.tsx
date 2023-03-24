@@ -2,14 +2,14 @@ import React, { ReactElement, useState } from "react";
 
 type ButtonType = (params: any) => any;
 
-interface style {
+interface Style {
   style?: {};
   className?: string;
 }
 
 type ButtonVariant = "button" | "reset" | "submit" | undefined;
 
-interface FormProps extends style {
+interface FormProps extends Style {
   children: React.ReactNode;
   onSubmit: ButtonType;
 }
@@ -31,7 +31,8 @@ export default function Form({
   );
 }
 
-interface InputProps extends style {
+interface InputProps extends Style {
+  children?: React.ReactNode;
   type?: string;
   label?: string;
   name?: string;
@@ -83,7 +84,30 @@ export function Input({
   );
 }
 
-interface ButtonProps extends style {
+export function CheckBox({ children, label = "", onChange }: InputProps) {
+  return (
+    <div className="flex items-start">
+      <div className="flex items-center h-5">
+        <input
+          id="remember"
+          aria-describedby="remember"
+          type="checkbox"
+          className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+          onChange={onChange}
+        />
+      </div>
+      <div className="ml-3 text-sm">
+        <label className="text-gray-500 dark:text-gray-300">
+          {label}
+          <>{children}</>
+        </label>
+      </div>
+    </div>
+  );
+}
+
+interface ButtonProps extends Style {
+  children?: React.ReactNode;
   value?: string;
   type?: ButtonVariant;
   params?: boolean;
@@ -91,6 +115,7 @@ interface ButtonProps extends style {
 }
 
 export function Button({
+  children,
   value = "Click",
   type = "button",
   style,
@@ -104,9 +129,9 @@ export function Button({
       style={style}
       className={`${
         className + " "
-      } w-full bg-black text-white hover:text-black hover:bg-white dark:bg-white dark:text-black dark:hover:text-white dark:hover:bg-black focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg px-5 py-2.5 text-center`}
+      } bg-black text-white hover:bg-white hover:text-black hover:border dark:bg-white dark:text-black dark:hover:text-white dark:hover:bg-black focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg px-5 py-2.5 text-center`}
     >
-      {value}
+      {children ? children : value}
     </button>
   );
 }

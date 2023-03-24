@@ -8,12 +8,6 @@ async function fetchData(token: string) {
 }
 
 export default function Home(): ReactElement {
-  useEffect(() => {
-    var token = localStorage.getItem("token");
-    if (token) {
-      fetchData(token);
-    }
-  }, []);
   return <div className="pt-12"></div>;
 }
 
