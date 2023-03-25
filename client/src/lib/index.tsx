@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 
 interface Style {
   style?: {};
@@ -16,7 +16,9 @@ interface ListProps extends Style {
 export function List({ children }: ListProps) {
   return (
     <ul>
-      <li>{children}</li>
+      {React.Children.map(children, (e, i) => {
+        return <li key={i}>{e}</li>;
+      })}
     </ul>
   );
 }

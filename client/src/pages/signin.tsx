@@ -17,7 +17,7 @@ export default function signin() {
   }
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="h-full flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+      <div className="h-screen flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <Box className="w-3/12 bg-white dark:bg-gray-600 shadow xl:w-4/12">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold md:text-2xl">

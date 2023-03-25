@@ -20,10 +20,10 @@ async function getCSRF() {
 }
 
 function App({ Component, pageProps }: AppProps) {
-  const csrf: string | undefined = Cookies.get("csrftoken");
-  if (!csrf) {
-    getCSRF();
-  }
+  // const csrf: string | undefined = Cookies.get("csrftoken");
+  // if (!csrf) {
+  //   getCSRF();
+  // }
 
   return (
     <ThemeProvider attribute="class">

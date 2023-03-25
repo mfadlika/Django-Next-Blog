@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { default as NextLink } from "next/link";
 import React from "react";
 
 interface Style {
@@ -23,8 +23,7 @@ export default function Nav({ children, style, className }: NavProps) {
   );
 }
 
-interface NavLinkProps extends Style {
-  children: React.ReactNode;
+interface NavLinkProps extends NavProps {
   href: string;
   role?: string;
 }
@@ -36,7 +35,7 @@ export function NavLink({
   role = undefined,
 }: NavLinkProps) {
   return (
-    <Link
+    <NextLink
       href={href}
       className={`${
         className + " "
@@ -44,6 +43,6 @@ export function NavLink({
       role={role}
     >
       {children}
-    </Link>
+    </NextLink>
   );
 }

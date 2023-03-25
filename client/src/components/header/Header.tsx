@@ -1,4 +1,4 @@
-import { Box, Text } from "@/lib";
+import { Box, List, Text } from "@/lib";
 import { Button, ToggleButton } from "@/lib/form";
 import Nav, { NavLink } from "@/lib/link";
 import { useTheme } from "next-themes";
@@ -75,14 +75,14 @@ export default function Header(props: LayoutProps): ReactElement {
                 <Box
                   className={`${
                     isShow ? " " : "hidden "
-                  } fixed top-12 right-5 z-50 bg-white dark:bg-gray-800`}
+                  } fixed top-9 right-3 z-50 bg-white border border-gray-400 dark:bg-gray-800 divide-y-2`}
                 >
                   <div className="px-4 py-3" role="none">
                     <Text>Neil Sims</Text>
                     <Text>neil.sims@flowbite.com</Text>
                   </div>
                   <ul className="py-1" role="none">
-                    <li>
+                    <List>
                       <NavLink
                         href="#"
                         className="text-sm rounded-none"
@@ -90,8 +90,6 @@ export default function Header(props: LayoutProps): ReactElement {
                       >
                         Dashboard
                       </NavLink>
-                    </li>
-                    <li>
                       <NavLink
                         href="#"
                         className="text-sm rounded-none"
@@ -99,8 +97,6 @@ export default function Header(props: LayoutProps): ReactElement {
                       >
                         Settings
                       </NavLink>
-                    </li>
-                    <li>
                       <NavLink
                         href="#"
                         className="text-sm rounded-none"
@@ -108,8 +104,6 @@ export default function Header(props: LayoutProps): ReactElement {
                       >
                         Earnings
                       </NavLink>
-                    </li>
-                    <li>
                       <NavLink
                         href="#"
                         className="text-sm rounded-none"
@@ -117,7 +111,7 @@ export default function Header(props: LayoutProps): ReactElement {
                       >
                         Sign out
                       </NavLink>
-                    </li>
+                    </List>
                   </ul>
                 </Box>
               </div>
@@ -135,45 +129,40 @@ export default function Header(props: LayoutProps): ReactElement {
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul className="space-y-2">
-            <li>
-              <NavLink href="#">
+            <List>
+              <NavLink href="/">
                 {Icon.feed}
                 <span className="flex-1 ml-3 whitespace-nowrap">Feed</span>
               </NavLink>
-            </li>
-            <li>
-              <NavLink href="#">
+
+              <NavLink href="chat">
                 {Icon.inbox}
-                <span className="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+                <span className="flex-1 ml-3 whitespace-nowrap">Chat</span>
                 <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
                   3
                 </span>
               </NavLink>
-            </li>
-            <li>
+
               <NavLink href="#">
                 {Icon.profile}
                 <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
               </NavLink>
-            </li>
-            <li>
+
               <NavLink href="#">
                 {Icon.category}
                 <span className="flex-1 ml-3 whitespace-nowrap">Category</span>
               </NavLink>
-            </li>
-            <li>
+
               <NavLink href="/signin">
                 {Icon.signIn}
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign In</span>
               </NavLink>
-            </li>
-            <li>
+
               <NavLink href="/signup">
                 {Icon.signUp}
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
               </NavLink>
-            </li>
+            </List>
 
             <Box>
               <p className="text-center max-w-xl mb-5 font-bold leading-tight tracking-tight text-black dark:text-white">
@@ -216,7 +205,7 @@ export default function Header(props: LayoutProps): ReactElement {
           </ul>
         </div>
       </aside>
-      <main id="main" className="py-4 sm:ml-64">
+      <main id="main" className="sm:ml-64">
         {props.children}
       </main>
     </header>
