@@ -1,5 +1,6 @@
 import axios from "axios";
 import Router from "next/router";
+import Cookies from "js-cookie";
 
 export default async function signupAPI(
   email: string,
@@ -19,6 +20,7 @@ export default async function signupAPI(
   })
     .then(() => Router.push("/"))
     .catch((error) => {
+      console.log(error);
       return error;
     });
   return data;
@@ -26,15 +28,18 @@ export default async function signupAPI(
 
 export async function signinAPI(username: string, password: string) {
   const data = axios
-    .post("http://localhost:8000/api/account/signin", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: { username: username, password: password },
-      xsrfCookieName: "csrftoken",
-      xsrfHeaderName: "X-CSRFToken",
-      withCredentials: true,
-    })
+    .post(
+      "http://localhost:8000/api/account/signin",
+      { data: { username: username, password: password } },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        xsrfCookieName: "csrftoken",
+        xsrfHeaderName: "X-CSRFToken",
+        withCredentials: true,
+      }
+    )
     .then((response) => {
       localStorage.setItem("token", response.data["token"]);
       console.log(response);
@@ -46,13 +51,39 @@ export async function signinAPI(username: string, password: string) {
   return data;
 }
 
-export async function verifyToken(token: string) {
-  axios.get("http://localhost:8000/api/account/index", {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
+export async function getData() {
+  var data;
+  await axios
+    .get("http://localhost:8000/api/account/index", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      xsrfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log(response);
+      data = response.data;
+    });
+  return data;
+}
 
-    withCredentials: true,
-  });
+export async function postData(post: string) {
+  axios
+    .post(
+      "http://localhost:8000/api/account/index",
+      { post: post },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        xsrfCookieName: "csrftoken",
+        xsrfHeaderName: "X-CSRFToken",
+        withCredentials: true,
+      }
+    )
+    .then((response) => console.log(response));
 }

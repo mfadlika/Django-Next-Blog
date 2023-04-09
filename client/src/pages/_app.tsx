@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
+import { useEffect } from "react";
 
 async function getCSRF() {
   const data = await axios({
@@ -20,10 +21,12 @@ async function getCSRF() {
 }
 
 function App({ Component, pageProps }: AppProps) {
-  // const csrf: string | undefined = Cookies.get("csrftoken");
-  // if (!csrf) {
-  //   getCSRF();
-  // }
+  useEffect(() => {
+    const csrf: string | undefined = Cookies.get("csrftoken");
+    if (!csrf) {
+      getCSRF();
+    }
+  }, [Cookies.get("csrftoken")]);
 
   return (
     <ThemeProvider attribute="class">
